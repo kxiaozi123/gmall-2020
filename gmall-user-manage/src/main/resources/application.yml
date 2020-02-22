@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  dubbo:
+    application:
+      name: user-manage
+    registry:
+      protocol: zookeeper
+      address: 212.129.128.36:2181
+    base-package: com.imooc.gmall
+    protocol:
+      name: dubbo
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    #控制台输出日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
