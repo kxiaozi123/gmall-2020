@@ -5,10 +5,12 @@ import com.imooc.gmall.SpuInfo;
 import com.imooc.gmall.service.ManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@Controller
+@RestController
 @CrossOrigin
 public class SpuManageController {
     @Reference
@@ -18,6 +20,14 @@ public class SpuManageController {
     @RequestMapping("spuList")
     public List<SpuInfo> spuList(SpuInfo spuInfo){
         return manageService.getSpuList(spuInfo);
+    }
+    @RequestMapping("saveSpuInfo")
+    public void saveSpuInfo(@RequestBody SpuInfo spuInfo){
+
+        if (spuInfo!=null){
+            // 调用保存
+            manageService.saveSpuInfo(spuInfo);
+        }
     }
 
 }

@@ -60,4 +60,9 @@ public interface ManageService {
      * @return
      */
     List<SpuInfo> getSpuList(SpuInfo spuInfo);
+
+    void saveSpuInfo(SpuInfo spuInfo);
+
+    List<BaseSaleAttr> getBaseSaleAttrList();
+
 }

@@ -16,3 +16,5 @@ spring:
     consumer:
       timeout: 10000
       check: false
+fileServer:
+  url: http://212.129.128.36
