@@ -6,6 +6,7 @@ import com.imooc.gmall.manage.mapper.*;
 import com.imooc.gmall.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -31,6 +32,14 @@ public class ManageServiceImpl implements ManageService {
     private SpuSaleAttrValueMapper spuSaleAttrValueMapper;
     @Autowired
     private BaseSaleAttrMapper baseSaleAttrMapper;
+    @Autowired
+    private SkuAttrValueMapper skuAttrValueMapper;
+    @Autowired
+    private SkuImageMapper skuImageMapper;
+    @Autowired
+    private SkuInfoMapper skuInfoMapper;
+    @Autowired
+    private SkuSaleAttrValueMapper skuSaleAttrValueMapper;
     @Override
     public List<BaseCatalog1> getCatalog1() {
         return baseCatalog1Mapper.selectAll();
@@ -52,9 +61,7 @@ public class ManageServiceImpl implements ManageService {
 
     @Override
     public List<BaseAttrInfo> getAttrList(String catalog3Id) {
-        BaseAttrInfo baseAttrInfo = new BaseAttrInfo();
-        baseAttrInfo.setCatalog3Id(catalog3Id);
-        return baseAttrInfoMapper.select(baseAttrInfo);
+        return baseAttrInfoMapper.getBaseAttrInfoListByCatalog3Id(catalog3Id);
     }
     @Transactional
     @Override
@@ -90,14 +97,14 @@ public class ManageServiceImpl implements ManageService {
             }
         }
     }
-
+    //没有用到
     @Override
     public List<BaseAttrValue> getAttrValueList(String attrId) {
         BaseAttrValue baseAttrValue = new BaseAttrValue();
         baseAttrValue.setAttrId(attrId);
         return  baseAttrValueMapper.select(baseAttrValue);
     }
-
+    //符合业务
     @Override
     public BaseAttrInfo getAttrInfo(String attrId) {
         BaseAttrInfo baseAttrInfo = baseAttrInfoMapper.selectByPrimaryKey(attrId);
@@ -109,10 +116,11 @@ public class ManageServiceImpl implements ManageService {
         return baseAttrInfo;
     }
 
-    public List<SpuInfo> getSpuList(SpuInfo spuInfo) {
-        List<SpuInfo> spuInfoList = spuInfoMapper.select(spuInfo);
-        return spuInfoList;
-    }
+    public List<SpuInfo> getSpuList(String catalog3Id) {
+        SpuInfo spuInfo = new SpuInfo();
+        spuInfo.setCatalog3Id(catalog3Id);
+        return spuInfoMapper.select(spuInfo);
+}
     @Transactional
     @Override
     public void saveSpuInfo(SpuInfo spuInfo) {
@@ -147,6 +155,51 @@ public class ManageServiceImpl implements ManageService {
     @Override
     public List<BaseSaleAttr> getBaseSaleAttrList() {
         return baseSaleAttrMapper.selectAll();
+    }
+
+    @Override
+    public List<SpuImage> getSpuImageList(String spuId) {
+        SpuImage spuImage = new SpuImage();
+        spuImage.setSpuId(spuId);
+        return spuImageMapper.select(spuImage);
+    }
+
+    @Override
+    public List<SpuSaleAttr> getSpuSaleAttrList(String spuId) {
+        //返回的是List SpuSaleAttr构造的对象（包含SpuSaleAttrValue集合）
+        return spuSaleAttrMapper.selectSpuSaleAttrList(spuId);
+    }
+
+    @Override
+    @Transactional
+    public void saveSkuInfo(SkuInfo skuInfo) {
+        skuInfoMapper.insertSelective(skuInfo);
+        List<SkuImage> skuImageList = skuInfo.getSkuImageList();
+        if(skuImageList!=null&&skuImageList.size()>0)
+        {
+            for (SkuImage skuImage : skuImageList) {
+                skuImage.setSkuId(skuInfo.getId());
+                skuImageMapper.insertSelective(skuImage);
+            }
+        }
+        List<SkuAttrValue> skuAttrValueList = skuInfo.getSkuAttrValueList();
+        if(skuAttrValueList!=null&&skuAttrValueList.size()>0)
+        {
+            for (SkuAttrValue skuAttrValue : skuAttrValueList) {
+                skuAttrValue.setSkuId(skuInfo.getId());
+                skuAttrValueMapper.insertSelective(skuAttrValue);
+            }
+        }
+        List<SkuSaleAttrValue> skuSaleAttrValueList = skuInfo.getSkuSaleAttrValueList();
+        if(skuSaleAttrValueList!=null&&skuSaleAttrValueList.size()>0)
+        {
+            for (SkuSaleAttrValue skuSaleAttrValue : skuSaleAttrValueList) {
+                skuSaleAttrValue.setSkuId(skuInfo.getId());
+                skuSaleAttrValueMapper.insertSelective(skuSaleAttrValue);
+            }
+        }
+
+
     }
 
 }

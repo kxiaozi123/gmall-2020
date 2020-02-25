@@ -55,14 +55,19 @@ public interface ManageService {
      */
     BaseAttrInfo getAttrInfo(String attrId);
     /**
-     * spuInfo 获取spuInfo 集合
-     * @param spuInfo
+     * catalog3Id 获取spuInfo 集合
+     * @param catalog3Id
      * @return
      */
-    List<SpuInfo> getSpuList(SpuInfo spuInfo);
+    List<SpuInfo> getSpuList(String catalog3Id);
 
     void saveSpuInfo(SpuInfo spuInfo);
 
     List<BaseSaleAttr> getBaseSaleAttrList();
 
+    List<SpuImage> getSpuImageList(String spuId);
+
+    List<SpuSaleAttr> getSpuSaleAttrList(String spuId);
+
+    void saveSkuInfo(SkuInfo skuInfo);
 }

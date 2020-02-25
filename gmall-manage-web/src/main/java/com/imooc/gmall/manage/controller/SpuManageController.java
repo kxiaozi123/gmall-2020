@@ -18,8 +18,8 @@ public class SpuManageController {
 
     // http://localhost:8082/spuList?catalog3Id=63 实体类对象封装
     @RequestMapping("spuList")
-    public List<SpuInfo> spuList(SpuInfo spuInfo){
-        return manageService.getSpuList(spuInfo);
+    public List<SpuInfo> spuList(String catalog3Id){
+        return manageService.getSpuList(catalog3Id);
     }
     @RequestMapping("saveSpuInfo")
     public void saveSpuInfo(@RequestBody SpuInfo spuInfo){
