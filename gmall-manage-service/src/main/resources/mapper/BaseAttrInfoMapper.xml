@@ -8,6 +8,7 @@
             <id property="id" column="attr_value_id"></id>
         </collection>
     </resultMap>
+    <!-- 在管理后台 添加SkuInfo用到 根据三级分类 查询平台属性和平台属性值 -->
     <select id="getBaseAttrInfoListByCatalog3Id" resultMap="baseAttrInfoMap">
          SELECT
                bai.id,

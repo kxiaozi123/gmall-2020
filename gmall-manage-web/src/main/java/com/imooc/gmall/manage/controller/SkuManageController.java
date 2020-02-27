@@ -20,6 +20,7 @@ public class SkuManageController {
     public List<SpuImage> spuImageList(String spuId){
         return manageService.getSpuImageList(spuId);
     }
+    //根据SpuId获取到销售属性和销售属性值
     @RequestMapping("spuSaleAttrList")
     public List<SpuSaleAttr> spuSaleAttrList(String spuId){
         // 调用service 层

@@ -6,7 +6,6 @@ import com.imooc.gmall.manage.mapper.*;
 import com.imooc.gmall.service.ManageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -200,6 +199,34 @@ public class ManageServiceImpl implements ManageService {
         }
 
 
+    }
+
+    /**
+     * 给Item使用 根据SkuId查询SkuInfo对象
+     * @param skuId
+     * @return
+     */
+    @Override
+    public SkuInfo getSkuInfo(String skuId) {
+        SkuInfo skuInfo = skuInfoMapper.selectByPrimaryKey(skuId);
+        //并且查出SkuInfoImageList
+        SkuImage skuImage = new SkuImage();
+        skuImage.setSkuId(skuId);
+        List<SkuImage> skuImageList = skuImageMapper.select(skuImage);
+        skuInfo.setSkuImageList(skuImageList);
+        return skuInfo;
+    }
+
+    @Override
+    public List<SpuSaleAttr> getSpuSaleAttrListCheckBySku(SkuInfo skuInfo) {
+        //根据SkuId和SpuId获取到销售属性(包括销售属性值)
+        return spuSaleAttrMapper.selectSpuSaleAttrListCheckBySku(skuInfo.getId(),skuInfo.getSpuId());
+    }
+
+    @Override
+    public List<SkuSaleAttrValue> getSkuSaleAttrValueListBySpu(String spuId) {
+        // 根据spuId 获取到Sku销售属性值的集合
+        return   skuSaleAttrValueMapper.selectSkuSaleAttrValueListBySpu(spuId);
     }
 
 }

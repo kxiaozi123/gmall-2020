@@ -32,7 +32,7 @@ public class ManageController {
         return manageService.getCatalog3(catalog2Id);
     }
 
-
+    //根据三级属性Id 查询平台属性和平台属性值
     @RequestMapping("attrInfoList")
     public List<BaseAttrInfo> attrInfoList(String catalog3Id){
         return manageService.getAttrList(catalog3Id);
