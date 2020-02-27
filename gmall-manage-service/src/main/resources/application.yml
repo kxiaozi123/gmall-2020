@@ -13,6 +13,10 @@ spring:
     base-package: com.imooc.gmall
     protocol:
       name: dubbo
+  redis:
+    host: 212.129.128.36
+    port: 6379
+    database: 0
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

@@ -25,10 +25,12 @@ public class ItemController {
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);
 
         //根据SkuInfo获取到SkuId和SpuId再去获取销售属性（带销售属性值）的集合
+        //回显并锁定销售属性值
         List<SpuSaleAttr> spuSaleAttrList = manageService.getSpuSaleAttrListCheckBySku(skuInfo);
 
         //根据SkuInfo中的SpuId   获取到Sku销售属性值的集合
         // 用来判断用户选择了哪些属性 再去选择SkuId
+        //点击销售属性值实现切换功能
         List<SkuSaleAttrValue> skuSaleAttrValueList = manageService.getSkuSaleAttrValueListBySpu(skuInfo.getSpuId());
         Map<String,Object> map=new HashMap<>();
         String key="";
