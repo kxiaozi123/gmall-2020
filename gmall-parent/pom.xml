@@ -17,6 +17,9 @@
         <module>../gmall-manage-web</module>
         <module>../gmall-manage-service</module>
         <module>../gmall-item-web</module>
+        <module>../gmall-list-service</module>
+        <module>../gmall-list-web</module>
+
     </modules>
     <!--定义jar版本-->
     <properties>

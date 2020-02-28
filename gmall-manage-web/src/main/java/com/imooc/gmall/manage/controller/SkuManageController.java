@@ -2,9 +2,12 @@ package com.imooc.gmall.manage.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.imooc.gmall.SkuInfo;
+import com.imooc.gmall.SkuLsInfo;
 import com.imooc.gmall.SpuImage;
 import com.imooc.gmall.SpuSaleAttr;
+import com.imooc.gmall.service.ListService;
 import com.imooc.gmall.service.ManageService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +18,8 @@ public class SkuManageController {
 
     @Reference
     private ManageService manageService;
+    @Reference
+    private ListService listService;
 
     @RequestMapping("spuImageList")
     public List<SpuImage> spuImageList(String spuId){
@@ -32,6 +37,13 @@ public class SkuManageController {
             manageService.saveSkuInfo(skuInfo);
         }
 
+    }
+    @RequestMapping("onSale")
+    public void onSale(String skuId){
+        SkuLsInfo skuLsInfo = new SkuLsInfo();
+        SkuInfo skuInfo = manageService.getSkuInfo(skuId);
+        BeanUtils.copyProperties(skuInfo,skuLsInfo);
+        listService.saveSkuLsInfo(skuLsInfo);
     }
 
 }
