@@ -1,12 +1,12 @@
 server:
-  port: 8086
+  port: 8084
 spring:
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
   dubbo:
     application:
-      name: list-web
+      name: item-web
     registry:
       protocol: zookeeper
       address: 212.129.128.36:2181

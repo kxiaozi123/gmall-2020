@@ -9,6 +9,8 @@ import io.searchbox.client.JestClient;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+import io.searchbox.core.search.aggregation.MetricAggregation;
+import io.searchbox.core.search.aggregation.TermsAggregation;
 import org.apache.lucene.queryparser.xml.builders.FilteredQueryBuilder;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -19,6 +21,9 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ListServiceImpl implements ListService {
@@ -64,7 +69,38 @@ public class ListServiceImpl implements ListService {
     }
     //设置返回结果
     private SkuLsResult makeResultForSearch(SearchResult searchResult, SkuLsParams skuLsParams) {
-        return null;
+        SkuLsResult skuLsResult=new SkuLsResult();
+        List<SkuLsInfo> skuLsInfoList=new ArrayList<>();
+        List<String> attrValueIdList=new ArrayList<>();
+        List<SearchResult.Hit<SkuLsInfo, Void>> hits = searchResult.getHits(SkuLsInfo.class);
+        for (SearchResult.Hit<SkuLsInfo, Void> hit : hits) {
+            SkuLsInfo skuLsInfo = hit.source;
+            //获取高亮
+            if(hit.highlight!=null && hit.highlight.size()>0)
+            {
+                Map<String, List<String>> highlight = hit.highlight;
+                List<String> skuName = highlight.get("skuName");
+                skuLsInfo.setSkuName(skuName.get(0));
+            }
+            skuLsInfoList.add(skuLsInfo);
+        }
+        skuLsResult.setSkuLsInfoList(skuLsInfoList);
+        skuLsResult.setTotal(searchResult.getTotal());
+        // 10  (10+3-1)/3
+        long totalPages = (searchResult.getTotal()+skuLsParams.getPageSize()-1)/skuLsParams.getPageSize();
+        skuLsResult.setTotalPages(totalPages);
+
+        MetricAggregation aggregations = searchResult.getAggregations();
+        TermsAggregation groupby_attr = aggregations.getTermsAggregation("groupby_attr");
+        for (TermsAggregation.Entry bucket : groupby_attr.getBuckets()) {
+            String key = bucket.getKey();
+            attrValueIdList.add(key);
+        }
+        skuLsResult.setAttrValueIdList(attrValueIdList);
+        //
+        //    private List<String> attrValueIdList;
+
+        return skuLsResult;
     }
     //生成dsl语句
     private String makeQueryStringForSearch(SkuLsParams skuLsParams) {
