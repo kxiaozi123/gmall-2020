@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.imooc.gmall.SkuInfo;
 import com.imooc.gmall.SkuSaleAttrValue;
 import com.imooc.gmall.SpuSaleAttr;
+import com.imooc.gmall.service.ListService;
 import com.imooc.gmall.service.ManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class ItemController {
     @Reference
     private ManageService manageService;
+    @Reference
+    private ListService listService;
     @RequestMapping("{skuId}.html")
     public String item(@PathVariable String skuId, HttpServletRequest request){
         //根据SkuId获取SkuInfo(带SkuImageList)
@@ -55,6 +58,7 @@ public class ItemController {
         request.setAttribute("valuesSkuJson",valuesSkuJson);
         request.setAttribute("skuInfo",skuInfo);
         request.setAttribute("spuSaleAttrList",spuSaleAttrList);
+        listService.incrHotScore(skuId);
         return "item";
     }
 

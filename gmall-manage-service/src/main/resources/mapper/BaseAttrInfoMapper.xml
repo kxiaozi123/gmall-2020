@@ -22,4 +22,10 @@
             WHERE
                catalog3_id = #{0}
     </select>
+    <!--$ :拼接字符串-->
+    <select id="selectAttrInfoListByIds" resultMap="baseAttrInfoMap">
+        SELECT ai.id,ai.attr_name,ai.catalog3_id, av.id attr_value_id ,av.attr_id ,av.value_name
+        FROM base_attr_info ai INNER JOIN base_attr_value av ON ai.id=av.attr_id
+        WHERE av.id IN (${valueIds})
+    </select>
 </mapper>

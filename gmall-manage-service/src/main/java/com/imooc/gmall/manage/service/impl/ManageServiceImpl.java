@@ -7,14 +7,18 @@ import com.imooc.gmall.config.RedisUtil;
 import com.imooc.gmall.manage.constant.ManageConst;
 import com.imooc.gmall.manage.mapper.*;
 import com.imooc.gmall.service.ManageService;
+import org.apache.commons.lang3.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import redis.clients.jedis.Jedis;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -403,5 +407,15 @@ public class ManageServiceImpl implements ManageService {
         // 根据spuId 获取到Sku销售属性值的集合
         return skuSaleAttrValueMapper.selectSkuSaleAttrValueListBySpu(spuId);
     }
+
+    @Override
+    public List<BaseAttrInfo> getAttrList(List<String> attrValueIdList) {
+        String valueIds = StringUtils.join(attrValueIdList.toArray(), ",");
+        return baseAttrInfoMapper.selectAttrInfoListByIds(valueIds);
+
+    }
+
+
+
 
 }
