@@ -9,4 +9,8 @@ public interface UserService {
     List<UserInfo> findAll();
 
     List<UserAddress> findAddressByUserId(String id);
+
+    UserInfo login(UserInfo userInfo);
+
+    UserInfo verify(String userId);
 }

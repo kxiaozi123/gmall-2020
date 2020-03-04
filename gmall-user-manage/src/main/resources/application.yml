@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://127.0.0.1:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.71.129:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
   dubbo:
     application:
       name: user-manage
@@ -13,11 +13,14 @@ spring:
     base-package: com.imooc.gmall
     protocol:
       name: dubbo
+  redis:
+    host: 192.168.71.129
+    port: 6379
+    database: 0
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
     #控制台输出日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
 
 

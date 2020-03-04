@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.71.128:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.71.129:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
   dubbo:
     application:
       name: list-service
@@ -14,12 +14,12 @@ spring:
     protocol:
       name: dubbo
   redis:
-    host: 192.168.71.128
+    host: 192.168.71.129
     port: 6379
     database: 0
   elasticsearch:
     jest:
-      uris: http://192.168.71.128:9200
+      uris: http://192.168.71.129:9200
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
