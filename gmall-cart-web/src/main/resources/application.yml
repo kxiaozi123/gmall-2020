@@ -1,0 +1,19 @@
+server:
+  port: 8088
+spring:
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  dubbo:
+    application:
+      name: cart-web
+    registry:
+      protocol: zookeeper
+      address: 212.129.128.36:2181
+    base-package: com.imooc.gmall
+    protocol:
+      name: dubbo
+    consumer:
+      timeout: 10000
+      check: false
+

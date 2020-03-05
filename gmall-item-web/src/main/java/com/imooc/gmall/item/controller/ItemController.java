@@ -24,7 +24,7 @@ public class ItemController {
     @Reference
     private ListService listService;
     @RequestMapping("{skuId}.html")
-    @LoginRequire
+    //@LoginRequire
     public String item(@PathVariable String skuId, HttpServletRequest request){
         //根据SkuId获取SkuInfo(带SkuImageList)
         SkuInfo skuInfo = manageService.getSkuInfo(skuId);

@@ -20,6 +20,8 @@
         <module>../gmall-list-service</module>
         <module>../gmall-list-web</module>
         <module>../gmall-passport-web</module>
+        <module>../gmall-cart-web</module>
+        <module>../gmall-cart-service</module>
 
     </modules>
     <!--定义jar版本-->

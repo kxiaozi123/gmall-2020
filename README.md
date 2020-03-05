@@ -5,3 +5,5 @@
 ##list-service 8085
 ##list-web 8086
 ## passport 8087
+## cart-web 8088
+## cart-service 8089
