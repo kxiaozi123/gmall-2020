@@ -1,7 +1,7 @@
 package com.imooc.gmall.service;
 
-import com.imooc.gmall.UserAddress;
-import com.imooc.gmall.UserInfo;
+import com.imooc.gmall.beans.UserAddress;
+import com.imooc.gmall.beans.UserInfo;
 
 import java.util.List;
 

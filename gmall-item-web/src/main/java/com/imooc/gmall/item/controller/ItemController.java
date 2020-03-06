@@ -2,10 +2,9 @@ package com.imooc.gmall.item.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.imooc.gmall.SkuInfo;
-import com.imooc.gmall.SkuSaleAttrValue;
-import com.imooc.gmall.SpuSaleAttr;
-import com.imooc.gmall.config.LoginRequire;
+import com.imooc.gmall.beans.SkuInfo;
+import com.imooc.gmall.beans.SkuSaleAttrValue;
+import com.imooc.gmall.beans.SpuSaleAttr;
 import com.imooc.gmall.service.ListService;
 import com.imooc.gmall.service.ManageService;
 import org.springframework.stereotype.Controller;

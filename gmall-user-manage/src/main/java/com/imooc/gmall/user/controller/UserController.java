@@ -1,6 +1,6 @@
 package com.imooc.gmall.user.controller;
 
-import com.imooc.gmall.UserInfo;
+import com.imooc.gmall.beans.UserInfo;
 import com.imooc.gmall.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -7,7 +7,7 @@
         type：返回结果集数据类型
         autoMapping: 自动映射！
     -->
-    <resultMap id="spuSaleAttrMap" type="com.imooc.gmall.SpuSaleAttr" autoMapping="true">
+    <resultMap id="spuSaleAttrMap" type="com.imooc.gmall.beans.SpuSaleAttr" autoMapping="true">
         <!--id:表示主键
         property:表示实体类的属性名
         column：表中的字段名
@@ -17,7 +17,7 @@
         <!--  <result></result>-->
         <!--mybatis 配置一对多-->
         <!-- ofType: 返回集合的属性对象-->
-        <collection property="spuSaleAttrValueList" ofType="com.imooc.gmall.SpuSaleAttrValue" autoMapping="true">
+        <collection property="spuSaleAttrValueList" ofType="com.imooc.gmall.beans.SpuSaleAttrValue" autoMapping="true">
             <id property="id" column="sale_attr_value_id"></id>
         </collection>
         <!--多对一-->

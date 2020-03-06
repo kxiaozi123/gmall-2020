@@ -1,8 +1,8 @@
 package com.imooc.gmall.service;
 
-import com.imooc.gmall.SkuLsInfo;
-import com.imooc.gmall.SkuLsParams;
-import com.imooc.gmall.SkuLsResult;
+import com.imooc.gmall.beans.SkuLsInfo;
+import com.imooc.gmall.beans.SkuLsParams;
+import com.imooc.gmall.beans.SkuLsResult;
 
 public interface ListService {
 

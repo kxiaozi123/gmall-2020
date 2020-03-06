@@ -2,8 +2,8 @@ package com.imooc.gmall.user.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.imooc.gmall.UserAddress;
-import com.imooc.gmall.UserInfo;
+import com.imooc.gmall.beans.UserAddress;
+import com.imooc.gmall.beans.UserInfo;
 import com.imooc.gmall.config.RedisUtil;
 import com.imooc.gmall.service.UserService;
 import com.imooc.gmall.user.mapper.UserAddressMapper;

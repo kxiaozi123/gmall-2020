@@ -1,7 +1,7 @@
 package com.imooc.gmall.passport.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.imooc.gmall.UserInfo;
+import com.imooc.gmall.beans.UserInfo;
 import com.imooc.gmall.passport.config.JwtUtil;
 import com.imooc.gmall.service.UserService;
 import org.springframework.beans.factory.annotation.Value;

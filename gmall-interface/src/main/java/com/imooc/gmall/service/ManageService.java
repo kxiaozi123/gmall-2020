@@ -1,7 +1,7 @@
 package com.imooc.gmall.service;
 
 
-import com.imooc.gmall.*;
+import com.imooc.gmall.beans.*;
 
 import java.util.List;
 

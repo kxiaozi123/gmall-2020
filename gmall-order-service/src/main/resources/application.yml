@@ -1,0 +1,28 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.71.130:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+  dubbo:
+    application:
+      name: order-service
+    registry:
+      protocol: zookeeper
+      address: 212.129.128.36:2181
+    base-package: com.imooc.gmall
+    protocol:
+      name: dubbo
+  redis:
+    host: 192.168.71.130
+    port: 6379
+    database: 0
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+server:
+  port: 8090
+mapper:
+  enum-as-simple-type: true

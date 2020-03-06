@@ -1,6 +1,6 @@
 package com.imooc.gmall.service;
 
-import com.imooc.gmall.CartInfo;
+import com.imooc.gmall.beans.CartInfo;
 
 import java.util.List;
 
@@ -10,4 +10,8 @@ public interface CartService {
     List<CartInfo> getCartList(String userId);
 
     List<CartInfo> mergeToCartList(List<CartInfo> cartListCK, String userId);
+
+    void checkCart(String skuId, String isChecked, String userId);
+
+    List<CartInfo> getCartCheckedList(String userId);
 }

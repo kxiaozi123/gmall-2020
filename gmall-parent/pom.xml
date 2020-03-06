@@ -22,6 +22,8 @@
         <module>../gmall-passport-web</module>
         <module>../gmall-cart-web</module>
         <module>../gmall-cart-service</module>
+        <module>../gmall-order-service</module>
+        <module>../gmall-order-web</module>
 
     </modules>
     <!--定义jar版本-->

@@ -1,6 +1,6 @@
 package com.imooc.gmall.cart.mapper;
 
-import com.imooc.gmall.CartInfo;
+import com.imooc.gmall.beans.CartInfo;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;

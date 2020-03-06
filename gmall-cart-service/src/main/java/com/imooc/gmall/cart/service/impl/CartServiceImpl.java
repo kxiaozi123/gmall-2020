@@ -3,8 +3,8 @@ package com.imooc.gmall.cart.service.impl;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.imooc.gmall.CartInfo;
-import com.imooc.gmall.SkuInfo;
+import com.imooc.gmall.beans.CartInfo;
+import com.imooc.gmall.beans.SkuInfo;
 import com.imooc.gmall.cart.constant.CartConst;
 import com.imooc.gmall.cart.mapper.CartInfoMapper;
 import com.imooc.gmall.config.RedisUtil;
@@ -132,8 +132,63 @@ public class CartServiceImpl implements CartService {
         }
         // 最终将合并之后的数据返回！  最后再查一下
         List<CartInfo> cartInfoList = loadCartCache(userId);
+        assert cartInfoList != null;
+        for (CartInfo cartInfo : cartInfoList) {
+            for (CartInfo info : cartListCK) {
+                if (cartInfo.getSkuId().equals(info.getSkuId())){
+                    // 只有被勾选的才会进行更改
+                    if (info.getIsChecked().equals("1")){
+                        cartInfo.setIsChecked(info.getIsChecked());
+                        // 更新redis中的isChecked
+                        checkCart(cartInfo.getSkuId(),info.getIsChecked(),userId);
+                    }
+                }
+            }
+        }
+
 
         return cartInfoList;
+    }
+
+    @Override
+    public void checkCart(String skuId, String isChecked, String userId) {
+        // 更新购物车中的isChecked标志
+        Jedis jedis = redisUtil.getJedis();
+        // 取得购物车中的信息
+        String userCartKey = CartConst.USER_KEY_PREFIX+userId+CartConst.USER_CART_KEY_SUFFIX;
+        String cartJson = jedis.hget(userCartKey, skuId);
+        // 将cartJson 转换成对象
+        CartInfo cartInfo = JSON.parseObject(cartJson, CartInfo.class);
+        cartInfo.setIsChecked(isChecked);
+        String cartCheckdJson = JSON.toJSONString(cartInfo);
+        jedis.hset(userCartKey,skuId,cartCheckdJson);
+        // 新增到已选中购物车
+        String userCheckedKey = CartConst.USER_KEY_PREFIX + userId + CartConst.USER_CHECKED_KEY_SUFFIX;
+        if("1".equals(isChecked))
+        {
+            jedis.hset(userCheckedKey,skuId,cartCheckdJson);
+        }
+        else {
+            jedis.hdel(userCheckedKey,skuId);
+        }
+        jedis.close();
+
+
+    }
+    //获取已选中的购物车去结算
+    @Override
+    public List<CartInfo> getCartCheckedList(String userId) {
+        // 获得redis中的key
+        String userCheckedKey = CartConst.USER_KEY_PREFIX + userId + CartConst.USER_CHECKED_KEY_SUFFIX;
+        Jedis jedis = redisUtil.getJedis();
+        List<String> cartCheckedList = jedis.hvals(userCheckedKey);
+        List<CartInfo> newCartList = new ArrayList<>();
+        for (String cartJson : cartCheckedList) {
+            CartInfo cartInfo = JSON.parseObject(cartJson,CartInfo.class);
+            newCartList.add(cartInfo);
+        }
+        return newCartList;
+
     }
 
     //  // 根据userId 查询购物车 {skuPrice 实时价格}

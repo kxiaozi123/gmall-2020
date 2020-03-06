@@ -2,13 +2,12 @@ package com.imooc.gmall.cart.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
-import com.imooc.gmall.CartInfo;
-import com.imooc.gmall.SkuInfo;
+import com.imooc.gmall.beans.CartInfo;
+import com.imooc.gmall.beans.SkuInfo;
 import com.imooc.gmall.config.CookieUtil;
 import com.imooc.gmall.service.ManageService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,5 +68,27 @@ public class CartCookieHandler {
         String cartJson  = CookieUtil.getCookieValue(request, cookieCartName, true);
         List<CartInfo> cartInfoList = JSON.parseArray(cartJson, CartInfo.class);
         return cartInfoList;
+    }
+
+    public void deleteCartCookie(HttpServletRequest request, HttpServletResponse response) {
+        CookieUtil.deleteCookie(request,response,cookieCartName);
+    }
+
+    public void checkCart(HttpServletRequest request, HttpServletResponse response, String skuId, String isChecked) {
+        //  取出购物车中的商品
+        List<CartInfo> cartList = getCartList(request);
+        if(cartList!=null&&cartList.size()>0)
+        {
+            for (CartInfo cartInfo : cartList) {
+                if(cartInfo.getSkuId().equals(skuId))
+                {
+                    cartInfo.setIsChecked(isChecked);
+                }
+            }
+        }
+        // 保存到cookie
+        String newCartJson = JSON.toJSONString(cartList);
+
+        CookieUtil.setCookie(request,response,cookieCartName,newCartJson,COOKIE_CART_MAXAGE,true);
     }
 }

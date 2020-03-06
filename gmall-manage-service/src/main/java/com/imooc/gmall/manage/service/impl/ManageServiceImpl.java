@@ -2,7 +2,7 @@ package com.imooc.gmall.manage.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
-import com.imooc.gmall.*;
+import com.imooc.gmall.beans.*;
 import com.imooc.gmall.config.RedisUtil;
 import com.imooc.gmall.manage.constant.ManageConst;
 import com.imooc.gmall.manage.mapper.*;
@@ -14,11 +14,8 @@ import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.CollectionUtils;
 import redis.clients.jedis.Jedis;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 

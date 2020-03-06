@@ -1,9 +1,9 @@
 package com.imooc.gmall.list.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
-import com.imooc.gmall.SkuLsInfo;
-import com.imooc.gmall.SkuLsParams;
-import com.imooc.gmall.SkuLsResult;
+import com.imooc.gmall.beans.SkuLsInfo;
+import com.imooc.gmall.beans.SkuLsParams;
+import com.imooc.gmall.beans.SkuLsResult;
 import com.imooc.gmall.config.RedisUtil;
 import com.imooc.gmall.service.ListService;
 import io.searchbox.client.JestClient;
@@ -13,7 +13,6 @@ import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 import io.searchbox.core.search.aggregation.MetricAggregation;
 import io.searchbox.core.search.aggregation.TermsAggregation;
-import org.apache.lucene.queryparser.xml.builders.FilteredQueryBuilder;
 import org.elasticsearch.index.query.*;
 import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.aggregations.bucket.terms.TermsBuilder;

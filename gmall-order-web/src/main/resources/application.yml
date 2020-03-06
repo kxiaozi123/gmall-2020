@@ -16,3 +16,5 @@ spring:
     consumer:
       timeout: 10000
       check: false
+mapper:
+  enum-as-simple-type: true

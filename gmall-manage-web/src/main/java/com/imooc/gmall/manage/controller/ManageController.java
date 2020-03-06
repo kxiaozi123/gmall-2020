@@ -1,7 +1,7 @@
 package com.imooc.gmall.manage.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.imooc.gmall.*;
+import com.imooc.gmall.beans.*;
 import com.imooc.gmall.service.ManageService;
 import org.springframework.web.bind.annotation.*;
 
