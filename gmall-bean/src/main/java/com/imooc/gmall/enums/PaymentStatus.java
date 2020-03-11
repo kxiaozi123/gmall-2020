@@ -1,5 +1,6 @@
 package com.imooc.gmall.enums;
 
+
 public enum PaymentStatus {
     UNPAID("支付中"),
     PAID("已支付"),
@@ -13,3 +14,4 @@ public enum PaymentStatus {
     }
 
 }
+

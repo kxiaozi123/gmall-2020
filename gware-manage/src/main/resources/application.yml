@@ -1,0 +1,23 @@
+activemq:
+  listener:
+    enable: true
+mapper:
+  enum-as-simple-type: true
+mybatis:
+  configuration:
+    mapUnderscoreToCamelCase: true
+  mapper-locations: classpath:mapper/*.xml
+order:
+  split:
+    url: http://order.gmall.com/orderSplit
+server:
+  port: 9001
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.71.130:3306/gmall?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: root
+    data-password: 123456
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5

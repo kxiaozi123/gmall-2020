@@ -34,7 +34,6 @@ public class OrderInfo implements Serializable {
     @Column
     private ProcessStatus processStatus;
 
-
     @Column
     private String userId;
 

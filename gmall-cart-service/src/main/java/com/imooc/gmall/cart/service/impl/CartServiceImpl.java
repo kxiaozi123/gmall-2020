@@ -193,7 +193,8 @@ public class CartServiceImpl implements CartService {
 
     //  // 根据userId 查询购物车 {skuPrice 实时价格}
     //查找数据库 然后设置到缓存中
-    private List<CartInfo> loadCartCache(String userId) {
+    @Override
+    public List<CartInfo> loadCartCache(String userId) {
         // select * from cartInfo where userId = ? 不可取！查询不到实时价格！
         // cartInfo , skuInfo 从这两张表中查询！
         List<CartInfo> cartInfoList = cartInfoMapper.selectCartListWithCurPrice(userId);

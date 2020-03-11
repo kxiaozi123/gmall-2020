@@ -24,6 +24,8 @@
         <module>../gmall-cart-service</module>
         <module>../gmall-order-service</module>
         <module>../gmall-order-web</module>
+        <module>../gware-manage</module>
+        <module>../gmall-payment</module>
 
     </modules>
     <!--定义jar版本-->
